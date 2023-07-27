@@ -2,7 +2,6 @@
     //@ts-nocheck
     import Playerselect from './Playerselect.svelte';
     import Rounds from './Rounds.svelte';
-    import LOGO from '$lib/LOGO.png'
     export let data;
     let { rows } = data;
 
@@ -162,12 +161,7 @@
   }
 </script>
 
-<div class="Logo-L">
-<img src={LOGO} alt="Club-LOGO">
-</div>
-<div class="Logo-R">
-    <img src={LOGO} alt="Club-LOGO">
-    </div>
+
 <h1>{mapstate.get(state)}</h1>
 
 
@@ -263,26 +257,7 @@
         white-space: nowrap;
     }
 
-    .Logo-L{
-        width: 5%;
-        aspect-ratio: 1/1;
-        position: absolute;
-    }
-    .Logo-L > img{
-        width: 100%;
-        height: 100%;
-    }
 
-    .Logo-R{
-        margin-left: 94%;
-        width: 5%;
-        aspect-ratio: 1/1;
-        position: absolute;
-    }
-    .Logo-R > img{
-        width: 100%;
-        height: 100%;
-    }
 
     table{
         border-collapse: collapse;

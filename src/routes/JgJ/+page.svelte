@@ -3,7 +3,6 @@
     import Playerselect from './Playerselect.svelte';
     import Rounds from './Rounds.svelte';
     import Table from './table.svelte';
-    import LOGO from '$lib/LOGO.png'
     export let data;
     let { rows } = data;
 
@@ -178,12 +177,7 @@
   }
 </script>
 
-<div class="Logo-L">
-<img src={LOGO} alt="Club-LOGO">
-</div>
-<div class="Logo-R">
-    <img src={LOGO} alt="Club-LOGO">
-    </div>
+
 <h1>{mapstate.get(state)}</h1>
 
 
