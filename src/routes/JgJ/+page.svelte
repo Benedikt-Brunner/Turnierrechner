@@ -42,6 +42,7 @@
 
     let tablearray;
     let finalplayers;
+    let Einzelrundig;
    let state = 0;
    let playercount = 2;
    let rounds = 1;
@@ -105,7 +106,7 @@
 
 
 
-
+            Einzelrundig = rounds == 1;
             rounds = rounds * (players.length % 2 == 0 ? players.length-1 : players.length)
             results = new Array(rounds );
             pairings = new Array(rounds);
@@ -224,7 +225,7 @@
 {:else if state == 1}
 {#if curround < rounds}
 <Rounds players={players} bind:results={results} bind:resmap={resmap}  gamesperround={gamesperround}  bind:numtoplayermap = {numtoplayermap} bind:tablearray = {tablearray}
-bind:curround = {curround} bind:pairings = {pairings} bind:playermap = {playermap} bind:rounds = {rounds}/>
+bind:Einzelrundig = {Einzelrundig} bind:curround = {curround} bind:pairings = {pairings} bind:playermap = {playermap} bind:rounds = {rounds}/>
 {:else if curround == rounds}
 <button on:click={makejson}>Eingabe</button>
 {/if}
@@ -280,27 +281,6 @@ bind:curround = {curround} bind:pairings = {pairings} bind:playermap = {playerma
     main > div > label{
         margin-right: 1%;
         white-space: nowrap;
-    }
-
-    .Logo-L{
-        width: 5%;
-        aspect-ratio: 1/1;
-        position: absolute;
-    }
-    .Logo-L > img{
-        width: 100%;
-        height: 100%;
-    }
-
-    .Logo-R{
-        margin-left: 94%;
-        width: 5%;
-        aspect-ratio: 1/1;
-        position: absolute;
-    }
-    .Logo-R > img{
-        width: 100%;
-        height: 100%;
     }
 
     table{

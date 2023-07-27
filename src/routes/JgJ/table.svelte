@@ -31,7 +31,13 @@
             {#if i == j}
                 <td class="cross"></td>
             {:else}
-            {#if tablearray[i]}
+            {#if Array.isArray(tablearray[i][j])}
+            <td>
+                {#each tablearray[i][j] as t}
+                    [{t}]
+                {/each}
+            </td>
+            {:else if tablearray[i]}
             <td>{tablearray[i][j]}</td>
             {:else}
             <td>-</td>

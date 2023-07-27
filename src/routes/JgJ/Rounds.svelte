@@ -10,6 +10,7 @@
     const playerStore = writable('');
     const numtostore = writable('');
     const tableStore = writable('');
+    const rundigStore = writable('');
 	const curroundStore = writable(0);
 
 
@@ -60,6 +61,13 @@
 	 */
 	export let  gamesperround;
 
+    /**
+	 * @type {Boolean}
+	 */
+	export let  Einzelrundig;
+
+
+
 	let gamesarr;
 		$:{ 
 			gamesarr = new Array(gamesperround);
@@ -72,7 +80,7 @@
 	}
 
     export let tablearray = new Array(players.length);
-    tablearray  = tablearray.fill().map(() => new Array(players.length).fill('-'));
+    tablearray  = Einzelrundig ? tablearray.fill().map(() => new Array(players.length).fill('-')) : tablearray.fill().map(() => new Array(players.length).fill().map(() => new Array()));
 
 
 	function reverser(arr){
@@ -95,6 +103,7 @@
         playerStore.set(playermap);
         numtostore.set(numtoplayermap);
         tableStore.set(tablearray);
+        rundigStore.set(Einzelrundig);
 	}
 
  
@@ -225,24 +234,41 @@ return matches;
 				switch (value){
 					case "WhiteWon":
 						resmap.set(curPairs[0][i].name,resmap.get(curPairs[0][i].name)+1);
+                        if(Einzelrundig){
                         tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)] = 1
                         tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)] = 0
+                        }else{
+                        tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)].push(1) 
+                        tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)].push(0)
+                        }
+
 					break;
 					case "BlackWon":
 						resmap.set(curPairs[2][curPairs[2].length-i-1].name,resmap.get(curPairs[2][curPairs[2].length-i-1].name)+1);
+                        if(Einzelrundig){
                         tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)] = 0
                         tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)] = 1
+                         }else{
+                        tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)].push(0)
+                        tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)].push(1)
+                        }
 					break;
 
 					case "Draw":
 						resmap.set(curPairs[0][i].name,resmap.get(curPairs[0][i].name)+0.5);
 						resmap.set(curPairs[2][curPairs[2].length-i-1].name,resmap.get(curPairs[2][curPairs[2].length-i-1].name)+0.5);
+                        if(Einzelrundig){
                         tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)] = 0.5
                         tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)] = 0.5
+                        }else{
+                        tablearray[playermap.get(curPairs[0][i].name)][playermap.get(curPairs[2][curPairs[2].length-i-1].name)].push(0.5)
+                        tablearray[playermap.get(curPairs[2][curPairs[2].length-i-1].name)][playermap.get(curPairs[0][i].name)].push(0.5)
+                        }
 					break;
 				}
 			}
 		)
+        console.log(tablearray)
 		curround++;
         resmap = resmap
         tablearray = tablearray
