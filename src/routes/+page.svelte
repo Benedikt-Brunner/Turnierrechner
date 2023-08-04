@@ -12,7 +12,7 @@
 	</div>
 	<div class="item-imp">
 		<img src={KO} alt="Player with Minus" width="40%" height="40%" />
-		<a href="/KO">K.o.</a>
+		<a href="/KO">K.o. (WiP)</a>
 	</div>
 	<div class="item-imp">
 		<img src={Swiss} alt="Player with arrows" width="40%" height="40%" />

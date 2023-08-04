@@ -184,15 +184,15 @@
 
 <main>
     {#if state == 0}
-    <div>
+    <div class="box">
         <label for="name">Turniername:</label>
         <input type="text" id="name" name="name" placeholder="Bitte ausfüllen" bind:value={name}>
     </div>
-    <div>
+    <div class="box">
         <label for="date">Datum:</label>
         <input type="date" id="date" name="date" bind:value={date} default = {date}>
     </div>
-    <div>
+    <div class="box">
         <label for="type">Spielmodus:</label>
         <select id="type" name="type" bind:value={type} default = "Klassisch">
             <option value={types.Classical.toString()}>Klassisch</option>
@@ -208,7 +208,7 @@
         <input type="radio" name = "roundtype" value = {2} bind:group={rounds}>
     </div>
     {#if !playersSet}
-<div>
+<div class="box">
     <label for="players">Spieler:</label>
     <input type="number" id="players" name="players" min="2" placeholder="Bitte ausfüllen" bind:value={playercount}>
 </div>
@@ -294,4 +294,13 @@ bind:Einzelrundig = {Einzelrundig} bind:curround = {curround} bind:pairings = {p
   border: 1px solid;
 }
 
+
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+    width: 20%;
+}
 </style>
