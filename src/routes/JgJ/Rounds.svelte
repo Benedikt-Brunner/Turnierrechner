@@ -93,8 +93,8 @@
 
 
 	let curPairs = new Array(3);
-		curPairs.fill([]);
-
+		curPairs = curPairs.fill().map(() => new Array(Math.floor(players.length/2)));
+        
 	$: {
 		pairStore.set(pairings);
 		resStore.set(results);
@@ -196,6 +196,9 @@ return matches;
 //end helper stuff
         function shuffle(){
             let matches = makeMatches(movearr(makearr(players.length),curround),curround);
+            console.log(players.length)
+            console.log(curround)
+            console.log(matches);
             if(matches[0].white == -1){
                 curPairs[1] = [numtoplayermap.get(matches[0].black)];
                 matches = matches.slice(1);
@@ -208,6 +211,7 @@ return matches;
                     curPairs[0][i] = numtoplayermap.get(matches[i].white);
                     curPairs[2][curPairs[2].length - (i+1)] = numtoplayermap.get(matches[i].black);
                 }
+                console.log(curPairs)
         }
 
         function setPairings(){
@@ -268,7 +272,6 @@ return matches;
 				}
 			}
 		)
-        console.log(tablearray)
 		curround++;
         resmap = resmap
         tablearray = tablearray
@@ -279,11 +282,7 @@ return matches;
         }
 
         function update(e) {
-            if(e == 0){
-                init();
-            }else{
                 shuffle();
-            }
             if(e < rounds)
             setPairings();
         }

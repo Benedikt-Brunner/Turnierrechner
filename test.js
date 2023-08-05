@@ -58,5 +58,12 @@ function makeMatches(arr, r){
 return matches;
 }
 
-console.log(movearr(makearr(14), 1))
-console.log(makeMatches(movearr(makearr(14), 2), 2))
+console.log(movearr(makearr(8), 1))
+console.log(makeMatches(movearr(makearr(8), 1), 1))
+console.log(makeMatches(movearr(makearr(8), 2), 2))
+console.log(makeMatches(movearr(makearr(8), 3), 3))
+console.log(makeMatches(movearr(makearr(8), 4), 4))
+console.log(makeMatches(movearr(makearr(8), 5), 5))
+console.log(makeMatches(movearr(makearr(8), 6), 6))
+console.log(makeMatches(movearr(makearr(8), 7), 7))
+console.log(makeMatches(movearr(makearr(8), 8), 8))

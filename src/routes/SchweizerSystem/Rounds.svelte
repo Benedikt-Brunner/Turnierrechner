@@ -77,7 +77,7 @@
 
 
 	let curPairs = new Array(3);
-		curPairs.fill([]);
+		curPairs.fill().map(() => new Array());
 
 	$: {
 		pairStore.set(pairings);
