@@ -33,6 +33,11 @@
      */
      let sitoutmap = new Map();
 
+         /**
+     * @type {Map<String, number>}
+     */
+     let placementMap = new Map();
+
    let state = 0;
    let playercount = 2;
    let rounds = 1;
@@ -134,6 +139,12 @@
     if(curround == rounds){
         state = 2;
         meta = {
+            Meta: {
+                name: name,
+                date_start: date,
+                date_end: date,
+                ordered_names: []
+            },
             Games: []
         }
         for(let i = 0; i < rounds; i++){
@@ -145,7 +156,18 @@
 				return resmap.get(a.name) - resmap.get(b.name);
 			});
             players = players.reverse();
-            console.log(players);
+
+            let place = 1;
+            for(let i = 0; i < players.length; i++){
+                if(i > 0 && resmap.get(players[i].name) != resmap.get(players[i-1].name))
+                    place = i+1;
+
+                placementMap.set(players[i].name,place);
+            }
+
+            players.forEach(p => {
+                meta.Meta.ordered_names.push(placementMap.get(p.name) + p.name);
+            });
     }
   }
   class Game{

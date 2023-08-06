@@ -39,6 +39,10 @@
      */
      let numtoplayermap = new Map();
 
+    /**
+     * @type {Map<String, number>}
+     */
+     let placementMap = new Map();
 
     let tablearray;
     let finalplayers;
@@ -151,6 +155,12 @@
     if(curround == rounds){
         state = 2;
         meta = {
+            Meta: {
+                name: name,
+                date_start: date,
+                date_end: date,
+                ordered_names: []
+            },
             Games: []
         }
         for(let i = 0; i < rounds; i++){
@@ -163,7 +173,20 @@
 				return resmap.get(a.name) - resmap.get(b.name);
 			});
             finalplayers = finalplayers.reverse();
+
+            let place = 1;
+            for(let i = 0; i < finalplayers.length; i++){
+                if(i > 0 && resmap.get(finalplayers[i].name) != resmap.get(finalplayers[i-1].name))
+                    place = i+1;
+
+                placementMap.set(finalplayers[i].name,place);
+            }
+
+            finalplayers.forEach(p => {
+                meta.Meta.ordered_names.push(placementMap.get(p.name) + p.name);
+            });
     }
+
   }
 
   class Game{
