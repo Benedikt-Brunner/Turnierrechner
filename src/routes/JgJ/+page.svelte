@@ -155,12 +155,14 @@
     if(curround == rounds){
         state = 2;
         meta = {
-            Meta: {
+            Meta: [
+                {
                 name: name,
                 date_start: date,
                 date_end: date,
                 ordered_names: []
-            },
+            }
+            ],
             Games: []
         }
         for(let i = 0; i < rounds; i++){
@@ -183,7 +185,7 @@
             }
 
             finalplayers.forEach(p => {
-                meta.Meta.ordered_names.push(placementMap.get(p.name) + p.name);
+                meta.Meta[0].ordered_names.push(placementMap.get(p.name) + p.name);
             });
     }
 
